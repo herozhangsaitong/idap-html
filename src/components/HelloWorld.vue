@@ -1,86 +1,14 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
-  </div>
+<div>
+<input type="text" v-model="search">
+<ul>
+<!-- 注意！注意！注意！这里循环遍历的是items，不再是data里的list数组 -->
+<li v-for="(item,index) in items">
+<span>{{item.name}}</span>
+<span>{{item.msg}}</span>
+</li>
+</ul>
+</div>
 </template>
 
 <script>
@@ -88,7 +16,30 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      search: '',
+      list: [
+        {name: 'AAA', msg: 'aaa文本介绍1'},
+        {name: 'BBB', msg: 'bbb文本介绍2'},
+        {name: 'CCC', msg: 'ccc文本介绍3'},
+        {name: 'DDD', msg: 'ddd文本介绍4'},
+        {name: 'EEE', msg: 'eee文本介绍5'}
+      ]
+    }
+  },
+  computed: {
+    items: function () {
+      var _search = this.search
+
+      if (_search) {
+        var reg = new RegExp(_search, 'ig')
+
+        return this.list.filter(function (e) {
+          return Object.keys(e).some(function (key) {
+            return e[key].match(reg)
+          })
+        })
+      };
+      return this.list
     }
   }
 }
