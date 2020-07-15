@@ -4,6 +4,7 @@
 <ul>
 <!-- 注意！注意！注意！这里循环遍历的是items，不再是data里的list数组 -->
 <li v-for="(item,index) in items">
+  1203785956
 <span>{{item.name}}</span>
 <span>{{item.msg}}</span>
 </li>
