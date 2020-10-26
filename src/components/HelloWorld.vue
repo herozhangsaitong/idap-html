@@ -3,8 +3,7 @@
 <input type="text" v-model="search">
 <ul>
 <!-- 注意！注意！注意！这里循环遍历的是items，不再是data里的list数组 -->
-<li v-for="(item,index) in items">
-  1203785956
+<li v-for="item in items" :key="item">
 <span>{{item.name}}</span>
 <span>{{item.msg}}</span>
 </li>
